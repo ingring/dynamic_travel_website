@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>travel</title>
+</head>
+<body>
+    <header>
+        <div class="carousel-container">
+            <img src="img/alex-vasey-3lxrM5yvkcI-unsplash.jpg" class="slide fade">
+            <img src="img/alexander-ramsey-dBtWLliLt5k-unsplash.jpg" class="slide fade">
+            <img src="img/anthony-delanoix-aDxmYZtYj7g-unsplash.jpg" class="slide fade">
+            <img src="img/caleb-miller-0Bs3et8FYyg-unsplash.jpg" class="slide fade">
+            <img src="img/fabio-mangione-fs1B0RX4j1o-unsplash.jpg" class="slide fade">
+            <img src="img/freestocks-_IZZKKL0uBs-unsplash.jpg" class="slide fade">
+            <img src="img/jarand-k-lokeland-3-MftKobVtg-unsplash.jpg" class="slide fade">
+            <img src="img/john-towner-UO02gAW3c0c-unsplash.jpg" class="slide fade">
+            <img src="img/joss-woodhead-3wFRlwS91yk-unsplash.jpg" class="slide fade">
+            <img src="img/kai-pilger--uQBxh6L5D4-unsplash.jpg" class="slide fade">
+            <img src="img/karsten-wurth-9qvZSH_NOQs-unsplash.jpg" class="slide fade">
+            <img src="img/leonard-cotte-R5scocnOOdM-unsplash.jpg" class="slide fade">
+            <img src="img/nastya-dulhiier-QboRVYU6sfQ-unsplash.jpg" class="slide fade">
+            <img src="img/neto-rivas-yZ7BF_hzV7E-unsplash.jpg" class="slide fade">
+            <img src="img/niklas-ohlrogge-BkmdKnuAZtw-unsplash.jpg" class="slide fade">
+            <img src="img/photoholgic-0e3nDftJlhw-unsplash.jpg" class="slide fade">
+            <img src="img/roman-kraft-g_gwdpsCVAY-unsplash.jpg" class="slide fade">
+            <img src="img/cale-weaver-szaqSbEkOXI-unsplash.jpg" class="slide fade">
+            <img src="img/joachim-riegel-jH3K68aj5-Y-unsplash.jpg" class="slide fade">
+            <img src="img/ouael-ben-salah-0xe2FGo7Vc0-unsplash.jpg" class="slide fade">
+        </div>
+        <h1>Find your next travel destination in Europe!</h1>
+    </header>
+    
+    <main>
+        <article>
+            <h2>Where to next?</h2>
+            <p>
+                <span id="day"></span> Have you always dreamed of going on an interrail trip in Europe? Or do you just want to explore new places, but do not know where you 
+                should start? It is so many cool places in Europe, the hardest part is to decide where you should travel. Maybe this website will help 
+                you decide which city you are going to visit next.
+            </p>
+            <p>
+                This random city button contains <span id="cityQuantity"></span> in Europe. If you prefer to visit a capital, a small city or a city with a 
+                beach, click on the pictures below to get your preference.
+            </p>
+            <p>
+                Where should you travel next?
+            </p>
+        <button id = "city">Random city</button>
+        <a href="#result">See the result!</a>
+        </article>
+
+        <article class="choseCity">
+            <h2>Beach, capital or small city?</h2>
+            <div class="choseCity-container">
+                <figure>
+                    <div id = "capitals"></div>
+                    <figcaption>Capital</figcaption>
+                </figure>
+                <figure>
+                    <div id = "beach"></div>
+                    <figcaption>City with a beach</figcaption>
+                </figure>
+                <figure>
+                    <div id = "otherCities"></div>
+                    <figcaption>Other cities</figcaption>
+                </figure>
+            </div>
+        </article>
+        <section id="result">
+            <img id="imgCity">
+            <article class="resultArticle">
+                <h2 id = "cityRandom"></h2>
+                <p id="info"></p>
+            </article>
+            <div class="blur"></div>
+        </section>
+        </main>
+
+        <footer>
+            <p>This page was created as part of the subject IDG1011 by Ingrid Gladheim, student from BWU at NTNU</p>
+        </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
