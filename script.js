@@ -1,3 +1,4 @@
+// ASSIGNMENT 1 & 2
 // I start the script with a bonus, it is not a part of the assignment. However, I have chosen to start the script with this carousel, 
 // because it is the first thing I want to run in this script. 
 // On the other side, it is the first time, of many times, I am using a document method in this script which is a part of the assignment (II. Built-in objects: b)
@@ -211,8 +212,19 @@ document.querySelector('#capitals').onclick = function() {cityRandom(capitals)};
 // ASSIGNMENT 3
 // Create a new list item when clicking on the "Add" button
 
+// GLOBAL VARIABLES
 let cityNodelist = document.getElementsByTagName("LI");
 
+// The input buttons 
+let input = document.getElementById("cityInput");
+let inputButton = document.getElementById("inputButton");
+let editButton = document.getElementById("editButton");
+let resetButton = document.getElementById("resetButton");
+let cancelButton = document.getElementById("cancelButton");
+
+
+// HELPER FUNCTIONS
+// Create Close element 
 function createCloseElement(element) {
     let span = document.createElement("SPAN");
     let cross = document.createTextNode("\u00D7");
@@ -221,33 +233,68 @@ function createCloseElement(element) {
     element.appendChild(span);
 }
 
-// for the existing list
-for (let i = 0; i < cityNodelist.length; i++) {
-    createCloseElement(cityNodelist[i]);
-};
-
+// Delete the selected li element when the user clicks on the close element
 function closeElement() {
     let close = document.getElementsByClassName("close");
     for (let i = 0; i < close.length; i++) {
         close[i].onclick = function() {
             if (confirm('Are you sure you want to delete this city?')) {
-                let div = this.parentElement;
-                // return div.style.display = "none";
-                return div.remove();
+                let cityLi = this.parentElement;
+                return cityLi.remove();
             };
         };
     };
 };
 
-closeElement();
-
 function createEditElement(element) {
     let span = document.createElement("SPAN");
-    // let edit = document.createTextNode("edit");
     let edit = document.createTextNode("\u270E");
     span.className = "edit";
     span.appendChild(edit);
     element.appendChild(span);
+};
+
+function emptyInputField() {
+    if (input.value != "") {
+        return input.value = "";
+    }
+}
+
+// capitalize the input
+function getInput(li) {
+    const inputCapitalized = input.value.charAt(0).toUpperCase() + input.value.slice(1);
+    let inputText = document.createTextNode(inputCapitalized);
+    li.appendChild(inputText);
+}
+
+// Universal function to display or hide the buttons and the input field
+function displayInputField(buttonDisplay) {
+    buttonDisplay.classList.toggle('hidden');
+}
+
+// egen funksjon til edit button, hvis inputButton eksisterer - fjern den
+function editInputField() {
+
+    displayInputField(input)
+    displayInputField(editButton);
+    displayInputField(resetButton);
+    displayInputField(cancelButton);
+
+    // possibility to press the edit button when the user already has the add button 
+    if (inputButton.classList != "hidden") {
+        displayInputField(input)
+        displayInputField(inputButton);
+        displayInputField(resetButton);
+        displayInputField(cancelButton);
+    }
+}
+
+// RUN THE CODE ON THE EXISTING LIST
+closeElement();
+
+// for the existing list
+for (let i = 0; i < cityNodelist.length; i++) {
+    createCloseElement(cityNodelist[i]);
 };
 
 // for the existing list
@@ -255,47 +302,57 @@ for (let i = 0; i < cityNodelist.length; i++) {
     createEditElement(cityNodelist[i]);
 };
 
-function resetInputBox () {
-    if (inputValue != "") {
-        new item(inputValue);
-        inputValue = "";
+
+// FUNCTIONS THAT IS CONNECTED WITH THE BUTTONS
+
+// when you click on the + button
+function addInputField() {
+    displayInputField(input);
+    displayInputField(inputButton);
+    displayInputField(resetButton);
+    displayInputField(cancelButton);
+
+    if (editButton.classList != "hidden") {
+        displayInputField(input)
+        displayInputField(editButton);
+        displayInputField(resetButton);
+        displayInputField(cancelButton);
     }
+}
+
+// cancelButton
+function cancelInputField() {
+    displayInputField(input);
+    displayInputField(resetButton);
+    displayInputField(cancelButton);
+
+    // cancel button removes either the editButton or the inputButton
+    if (editButton.classList != "hidden") {
+        displayInputField(editButton);
+    }
+
+    else if (inputButton.classList != "hidden") {
+        displayInputField(inputButton);
+    }
+
+    emptyInputField();
 }
 
 function editElement() {
     let edit = document.getElementsByClassName("edit");
-    let input = document.getElementById("cityInput");
-    let editButton = document.getElementById("editButton");
-    let cancelButton = document.getElementById("cancelButton");
 
     for (let i = 0; i < edit.length; i++) {
-        edit[i].onclick = function(e) {
-
-            console.log(e.target.parentNode)
-
-            // input.style.display = "block";
-            // editButton.style.display = "block";
-            input.classList.toggle('hidden');
-            editButton.classList.toggle('hidden');
-            cancelButton.classList.toggle('hidden');
-
-
-            // document.getElementById("cityInput").value = e.target.parentNode.textContent
+        edit[i].onclick = function() {
+            editInputField();
 
             editButton.onclick = function() {
                 if (confirm('Are you sure you want to edit this city?')) {
+
                     let li = document.createElement("li");
-                    let inputValue = document.getElementById("cityInput").value;
-                    const inputCapitalized = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
-                    let inputText = document.createTextNode(inputCapitalized);
-                    // let inputText = document.createTextNode(inputValue);
-                    li.appendChild(inputText);
+                    getInput(li)
             
                     let cityListElement = edit[i].parentElement;
-                    console.log(cityListElement);
                     cityListElement.replaceWith(li);
-            
-
             
                     createCloseElement(li)
             
@@ -305,24 +362,14 @@ function editElement() {
                 
                     editElement();
             
-                    input.classList.toggle('hidden');
-                    editButton.classList.toggle('hidden');
-                    cancelButton.classList.toggle('hidden');
+                    editInputField();
             
-                    if (input.value != "") {
-                        return input.value = "";
-            
+                    emptyInputField();
 
-                    }
                 } else {
-                    input.classList.toggle('hidden');
-                    editButton.classList.toggle('hidden');
-                    cancelButton.classList.toggle('hidden');
-            
-                    if (input.value != "") {
-                        return input.value = "";
-                    }
-                }
+                    editInputField();
+                    emptyInputField();
+                };
             };
         };
     };
@@ -330,74 +377,18 @@ function editElement() {
 
 editElement();
 
-function displayInputBox(buttonDisplay) {
-    // let input = document.createElement("input");
-    // input.setAttribute("type", "text");
-    // input.setAttribute("id", "cityInput");
-    // input.setAttribute("placeholder", "City...");
-
-    // let inputButton = document.createElement("button");
-    // let add = document.createTextNode("add");
-    // inputButton.appendChild(add);
-    // inputButton.setAttribute("onclick", "newElement()");
-    // inputButton.setAttribute("id", "inputButton");
-
-    // console.log(input);
-    // console.log(inputButton)
-
-    // document.getElementById("input").appendChild(input);
-    // document.getElementById("input").appendChild(inputButton);
-
-    
-    // let input = document.getElementById("cityInput");
-    // let inputButton = document.getElementById("inputButton");
-    // let cancelButton = document.getElementById("cancelButton");
-
-    // input.style.display = "block";
-    // inputButton.style.display = "block";
-    // cancelButton.style.display = "block";
-    // console.log(buttonDisplay.style.display)
-
-    // if (buttonDisplay.style.display === "none") {
-    //     buttonDisplay.style.display = "block";
-    //   } else {
-    //     buttonDisplay.style.display = "none";
-    //   }
-
-
-    buttonDisplay.classList.toggle('hidden');
-
-}
-
-// when you click on the + button
-// hvis editButton har denne klassen - fjern den 
-function addInputBox() {
-    let input = document.getElementById("cityInput");
-    let inputButton = document.getElementById("inputButton");
-    let cancelButton = document.getElementById("cancelButton");
-
-    displayInputBox(input);
-    displayInputBox(inputButton);
-    displayInputBox(cancelButton);
-}
-
-// egen funksjon til edit button, hvis inputButton eksisterer - fjern den
 
 // to add new elements
 function newElement() {
-    let li = document.createElement("li");
-    let inputValue = document.getElementById("cityInput").value;
-    const inputCapitalized = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
-    let inputText = document.createTextNode(inputCapitalized);
-    // let inputText = document.createTextNode(inputValue);
-    li.appendChild(inputText);
 
-    if (inputValue === '') {
+    if (input.value === '') {
       alert("You must write something!");
     } else {
         if (confirm('Are you sure you want to add this city to your bucket list?')) {
+            let li = document.createElement("li");
+            getInput(li)
             document.getElementById("cityList").appendChild(li);
-            document.getElementById("cityInput").value = "";
+            emptyInputField();
 
             createCloseElement(li)
             
@@ -405,107 +396,18 @@ function newElement() {
         
             createEditElement(li);
 
-            addInputBox();
+            addInputField();
+
+        } else {        
+            addInputField();
+            emptyInputField();
         }
     }
-    // document.getElementById("cityInput").value = "";
-
-    // createCloseElement(li)
-    
-    // closeElement();
-
-    // createEditElement(li);
-
-    // let input = document.getElementById("cityInput");
-    // let inputButton = document.getElementById("inputButton");
-    // let cancelButton = document.getElementById("cancelButton");
-
-    // input.style.display = "none";
-    // inputButton.style.display = "none";
-    // cancelButton.style.display = "none";
-
-  }
-
-// function addInputBox() {
-//     let input = document.getElementById("cityInput");
-//     let inputButton = document.getElementById("inputButton");
-//     let cancelButton = document.getElementById("cancelButton");
-
-//     displayInputBox(input);
-//     displayInputBox(inputButton);
-//     displayInputBox(cancelButton);
-// }
-
-// function showInputBox (button) {
-//     // let input = document.createElement("input");
-//     // input.setAttribute("type", "text");
-//     // input.setAttribute("id", "cityInput");
-//     // input.setAttribute("placeholder", "City...");
-
-//     // let inputButton = document.createElement("button");
-//     // let add = document.createTextNode("add");
-//     // inputButton.appendChild(add);
-//     // inputButton.setAttribute("onclick", "newElement()");
-//     // inputButton.setAttribute("id", "inputButton");
-
-//     // console.log(input);
-//     // console.log(inputButton)
-
-//     // document.getElementById("input").appendChild(input);
-//     // document.getElementById("input").appendChild(inputButton);
-
-    
-//     let input = document.getElementById("cityInput");
-//     let inputButton = document.getElementById("inputButton");
-//     let cancelButton = document.getElementById("cancelButton");
-
-//     // input.style.display = "block";
-//     // inputButton.style.display = "block";
-//     // cancelButton.style.display = "block";
-
-//     if (button.style.display === "none") {
-//         console.log("heihei")
-//         button.style.display = "block";
-//       } else {
-//         button.style.display = "none";
-//       }
-// }
-
-// var x = document.getElementById("myDIV");
-// if (x.style.display === "none") {
-//   x.style.display = "block";
-// } else {
-//   x.style.display = "none";
-// }
+}
 
 
-// https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
-
-//   document.querySelector('#add').onclick = function() {addElement()};
-//   document.querySelector('#replaceEdit').onclick = function() {addElement()};
-
-
-
-// function checkButton () {
-//     if (document.getElementById('addInputBox').clicked) {
-//         console.log("input button was clicked")
-//     }
-
-//     else if (document.querySelector('.edit').clicked) {
-//        console.log("edit button was clicked")
-//     }
-// }
-
-// function addElement () {
-//     if (document.getElementById('addInputBox').clicked == true)
-//     {
-//         console.log(newElement);
-//     }
-
-//     else if (document.querySelector('.edit').clicked == true)
-//     {
-//        console.log(editElement);
-//     }
-// }
-
-document.getElementById("addInputBox").addEventListener("click", addInputBox);
+// ADD EVENT LISTENER 
+document.getElementById("addInputField").addEventListener("click", addInputField);
+inputButton.addEventListener("click", newElement);
+editButton.addEventListener("click", editElement);
+cancelButton.addEventListener("click", cancelInputField);

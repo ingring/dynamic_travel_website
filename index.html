@@ -81,7 +81,7 @@
 
         <section class="bucketlist">
             <div id="bucketlistTitle">
-                <button id="addInputBox">+</button>
+                <button id="addInputField">+</button>
                 <h2>Bucket list!</h2>
             </div>
 
@@ -94,11 +94,10 @@
             </ul>
             <form id="input">
                 <input type="text" id="cityInput" class="hidden" placeholder="City...">
-                <input type="reset" value="cancel" id="cancelButton" class="hidden">
-                <button type="button" onclick="newElement()" id="inputButton" class="hidden">add</button>
-                <button type="button" onclick="editElement()" id="editButton" class="hidden">add</button>
-
-                <!-- onfocus="this.value='' -->
+                <input type="reset" value="reset" id="resetButton" class="hidden">
+                <button type="button" id="inputButton" class="hidden">add</button>
+                <button type="button" id="editButton" class="hidden">add</button>
+                <button type="button" id="cancelButton" class="hidden">cancel</button>
 
             </form>
         </section>

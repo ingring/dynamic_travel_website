@@ -243,7 +243,7 @@ li {
     display: none;
 }
 
-#addInputBox, #inputButton, #editButton, #cancelButton {
+#addInputField, #inputButton, #editButton, #cancelButton, #resetButton {
     padding: 1em 1.5em;
     background-color: black;
     color: white;
