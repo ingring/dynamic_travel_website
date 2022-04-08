@@ -128,7 +128,7 @@ figure > img {
     object-fit: cover;
 }
 
-button {
+#city {
     padding: 2em;
     margin: 4em;
     font-weight: bold;
@@ -205,4 +205,57 @@ footer > p {
     article:nth-child(1){
         width: 40vw;
     }
+}
+
+/* Assignment 3 */
+li {
+    list-style: none;
+    padding: 1em 6.2em;
+    display: grid;
+    grid-template-columns: 30vw 2em;
+}
+
+.close {
+    color: rebeccapurple;
+    grid-column: 2;
+    opacity: .5;
+}
+
+.close:hover, .edit:hover {
+    opacity: 1;
+}
+
+.edit {
+    grid-column: 3;
+    font-weight: bolder;
+    opacity: .5;
+}
+
+#bucketlistTitle {
+    display: flex;
+}
+
+/* #cityInput, #inputButton, #editButton, #cancelButton {
+    display: none;
+} */
+
+.hidden {
+    display: none;
+}
+
+#addInputBox, #inputButton, #editButton, #cancelButton {
+    padding: 1em 1.5em;
+    background-color: black;
+    color: white;
+}
+
+#input {
+    display: flex;
+    margin: 1.5em 6em 0;
+}
+
+.bucketlist {
+    max-width: 50vw;
+    margin: 0 auto;
+    padding-bottom: 5vh;
 }

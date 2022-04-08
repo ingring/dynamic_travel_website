@@ -78,6 +78,30 @@
             </article>
             <div class="blur"></div>
         </section>
+
+        <section class="bucketlist">
+            <div id="bucketlistTitle">
+                <button id="addInputBox">+</button>
+                <h2>Bucket list!</h2>
+            </div>
+
+            <ul id="cityList">
+                <li>Barcelona</li>
+                <li>London</li>
+                <li>Bergen</li>
+                <li>Longyearbyen</li>
+                <li>Dubrovnik</li>
+            </ul>
+            <form id="input">
+                <input type="text" id="cityInput" class="hidden" placeholder="City...">
+                <input type="reset" value="cancel" id="cancelButton" class="hidden">
+                <button type="button" onclick="newElement()" id="inputButton" class="hidden">add</button>
+                <button type="button" onclick="editElement()" id="editButton" class="hidden">add</button>
+
+                <!-- onfocus="this.value='' -->
+
+            </form>
+        </section>
         </main>
 
         <footer>
