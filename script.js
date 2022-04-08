@@ -224,20 +224,22 @@ let cancelButton = document.getElementById("cancelButton");
 
 
 // HELPER FUNCTIONS
-// Create Close element 
-function createCloseElement(element) {
+// I. Two buttons (delete & edit): 1. delete button 
+// create delete element 
+function createDeleteElement(element) {
     let span = document.createElement("SPAN");
     let cross = document.createTextNode("\u00D7");
-    span.className = "close";
+    span.className = "delete";
     span.appendChild(cross);
     element.appendChild(span);
 }
 
-// Delete the selected li element when the user clicks on the close element
-function closeElement() {
-    let close = document.getElementsByClassName("close");
-    for (let i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
+// delete the selected li element when the user clicks on the close element
+function deleteElement() {
+    let deleteElements = document.getElementsByClassName("delete");
+    for (let i = 0; i < deleteElements.length; i++) {
+        deleteElements[i].onclick = function() {
+            // I. Two buttons (delete & edit): 1a) confirm before the item is deleted
             if (confirm('Are you sure you want to delete this city?')) {
                 let cityLi = this.parentElement;
                 return cityLi.remove();
@@ -246,6 +248,8 @@ function closeElement() {
     };
 };
 
+// I. Two buttons (delete & edit): 2. edit button 
+// create the edit element 
 function createEditElement(element) {
     let span = document.createElement("SPAN");
     let edit = document.createTextNode("\u270E");
@@ -254,13 +258,14 @@ function createEditElement(element) {
     element.appendChild(span);
 };
 
+// if the input is not empty, clean the input 
 function emptyInputField() {
     if (input.value != "") {
         return input.value = "";
     }
 }
 
-// capitalize the input
+// get the input, capitalize the input and append it to the li that is created where the function runs 
 function getInput(li) {
     const inputCapitalized = input.value.charAt(0).toUpperCase() + input.value.slice(1);
     let inputText = document.createTextNode(inputCapitalized);
@@ -272,11 +277,10 @@ function displayInputField(buttonDisplay) {
     buttonDisplay.classList.toggle('hidden');
 }
 
-// egen funksjon til edit button, hvis inputButton eksisterer - fjern den
+// I. Two buttons (delete & edit): 2 display a text field with buttons 
 function editInputField() {
-
-    displayInputField(input)
-    displayInputField(editButton);
+    displayInputField(input);
+    displayInputField(editButton); 
     displayInputField(resetButton);
     displayInputField(cancelButton);
 
@@ -289,23 +293,10 @@ function editInputField() {
     }
 }
 
-// RUN THE CODE ON THE EXISTING LIST
-closeElement();
-
-// for the existing list
-for (let i = 0; i < cityNodelist.length; i++) {
-    createCloseElement(cityNodelist[i]);
-};
-
-// for the existing list
-for (let i = 0; i < cityNodelist.length; i++) {
-    createEditElement(cityNodelist[i]);
-};
-
 
 // FUNCTIONS THAT IS CONNECTED WITH THE BUTTONS
 
-// when you click on the + button
+// II. add new items to the list: 1. when the user presses the  + button the same text field is revealed as well as buttons, add (confirm), cancel and reset
 function addInputField() {
     displayInputField(input);
     displayInputField(inputButton);
@@ -320,7 +311,7 @@ function addInputField() {
     }
 }
 
-// cancelButton
+// I. Two buttons (delete & edit): 2b) Cancel button that hides the text field and the buttons
 function cancelInputField() {
     displayInputField(input);
     displayInputField(resetButton);
@@ -338,25 +329,29 @@ function cancelInputField() {
     emptyInputField();
 }
 
+// I. Two buttons (delete & edit): 2. edit button 
 function editElement() {
     let edit = document.getElementsByClassName("edit");
 
     for (let i = 0; i < edit.length; i++) {
-        edit[i].onclick = function() {
+        edit[i].onclick = function(e) {
+
+            // display the text input field and the buttons (edit, cancel and reset)
             editInputField();
 
+            // a) when clicking on the confirm button, orin my case edit button, will the selected li element be replaced with the new item
             editButton.onclick = function() {
                 if (confirm('Are you sure you want to edit this city?')) {
 
                     let li = document.createElement("li");
-                    getInput(li)
+                    getInput(li);
             
-                    let cityListElement = edit[i].parentElement;
+                    let cityListElement = e.target.parentElement;
                     cityListElement.replaceWith(li);
             
-                    createCloseElement(li)
+                    createDeleteElement(li)
             
-                    closeElement();
+                    deleteElement();
             
                     createEditElement(li);
                 
@@ -375,10 +370,8 @@ function editElement() {
     };
 };
 
-editElement();
 
-
-// to add new elements
+// II. add new items to the list
 function newElement() {
 
     if (input.value === '') {
@@ -390,9 +383,9 @@ function newElement() {
             document.getElementById("cityList").appendChild(li);
             emptyInputField();
 
-            createCloseElement(li)
+            createDeleteElement(li)
             
-            closeElement();
+            deleteElement();
         
             createEditElement(li);
 
@@ -404,6 +397,25 @@ function newElement() {
         }
     }
 }
+
+
+// RUN THE CODE ON THE EXISTING LIST
+
+// create the close element for the existing list
+for (let i = 0; i < cityNodelist.length; i++) {
+    createDeleteElement(cityNodelist[i]);
+};
+
+// makes it possible to delete the selected li element when the user clicks on the close element
+deleteElement();
+
+// create edit element for the existing list
+for (let i = 0; i < cityNodelist.length; i++) {
+    createEditElement(cityNodelist[i]);
+};
+
+// makes it possible to edit the selected li element when the user clicks on the close element
+editElement();
 
 
 // ADD EVENT LISTENER 
