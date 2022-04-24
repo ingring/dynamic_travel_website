@@ -210,33 +210,34 @@ document.querySelector('#capitals').onclick = function() {cityRandom(capitals)};
 
 
 // ASSIGNMENT 3
-// Create a new list item when clicking on the "Add" button
+// Create a new list item when clicking on the 'Add' button
 
 // GLOBAL VARIABLES
-let cityNodelist = document.getElementsByTagName("LI");
+
+let cityNodelist = document.querySelectorAll('LI');
 
 // The input buttons 
-let input = document.getElementById("cityInput");
-let inputButton = document.getElementById("inputButton");
-let editButton = document.getElementById("editButton");
-let resetButton = document.getElementById("resetButton");
-let cancelButton = document.getElementById("cancelButton");
+let input = document.querySelector('#cityInput');
+let inputButton = document.querySelector('#inputButton');
+let editButton = document.querySelector('#editButton');
+let resetButton = document.querySelector('#resetButton');
+let cancelButton = document.querySelector('#cancelButton');
 
 
 // HELPER FUNCTIONS
-// I. Two buttons (delete & edit): 1. delete button 
-// create delete element 
+
+/* I. Two buttons (delete & edit): 1. delete button 
+create delete element, the user will see a cross */
 function createDeleteElement(element) {
-    let span = document.createElement("SPAN");
-    let cross = document.createTextNode("\u00D7");
-    span.className = "delete";
-    span.appendChild(cross);
-    element.appendChild(span);
+    let span = document.createElement('SPAN');
+    span.textContent = '\u00D7';
+    span.className = 'delete';
+    element.append(span);
 }
 
 // delete the selected li element when the user clicks on the close element
 function deleteElement() {
-    let deleteElements = document.getElementsByClassName("delete");
+    let deleteElements = document.querySelectorAll('.delete');
     for (let i = 0; i < deleteElements.length; i++) {
         deleteElements[i].onclick = function() {
             // I. Two buttons (delete & edit): 1a) confirm before the item is deleted
@@ -247,29 +248,30 @@ function deleteElement() {
         };
     };
 };
+/* I got inspired by this website, https://www.w3schools.com/howto/howto_js_todolist.asp, then I used the list "Overview of old vs. new features of JavaScript" 
+and "Lecture notes – week 11: DOM -- part two" to change outdated features and make it my own code. */
 
-// I. Two buttons (delete & edit): 2. edit button 
-// create the edit element 
+
+/* I. Two buttons (delete & edit): 2. edit button 
+ create the edit element, the user will see a pen */
 function createEditElement(element) {
-    let span = document.createElement("SPAN");
-    let edit = document.createTextNode("\u270E");
-    span.className = "edit";
-    span.appendChild(edit);
-    element.appendChild(span);
+    let span = document.createElement('SPAN');
+    span.textContent = '\u270E';
+    span.className = 'edit';
+    element.append(span);
 };
-
-// if the input is not empty, clean the input 
-function emptyInputField() {
-    if (input.value != "") {
-        return input.value = "";
-    }
-}
 
 // get the input, capitalize the input and append it to the li that is created where the function runs 
 function getInput(li) {
     const inputCapitalized = input.value.charAt(0).toUpperCase() + input.value.slice(1);
-    let inputText = document.createTextNode(inputCapitalized);
-    li.appendChild(inputText);
+    li.textContent = inputCapitalized;
+}
+
+// if the input is not empty, clean the input 
+function emptyInputField() {
+    if (input.value != '') {
+        return input.value = '';
+    }
 }
 
 // Universal function to display or hide the buttons and the input field
@@ -285,7 +287,7 @@ function editInputField() {
     displayInputField(cancelButton);
 
     // possibility to press the edit button when the user already has the add button 
-    if (inputButton.classList != "hidden") {
+    if (inputButton.classList != 'hidden') {
         displayInputField(input)
         displayInputField(inputButton);
         displayInputField(resetButton);
@@ -303,7 +305,7 @@ function addInputField() {
     displayInputField(resetButton);
     displayInputField(cancelButton);
 
-    if (editButton.classList != "hidden") {
+    if (editButton.classList != 'hidden') {
         displayInputField(input)
         displayInputField(editButton);
         displayInputField(resetButton);
@@ -318,11 +320,11 @@ function cancelInputField() {
     displayInputField(cancelButton);
 
     // cancel button removes either the editButton or the inputButton
-    if (editButton.classList != "hidden") {
+    if (editButton.classList != 'hidden') {
         displayInputField(editButton);
     }
 
-    else if (inputButton.classList != "hidden") {
+    else if (inputButton.classList != 'hidden') {
         displayInputField(inputButton);
     }
 
@@ -331,7 +333,7 @@ function cancelInputField() {
 
 // I. Two buttons (delete & edit): 2. edit button 
 function editElement() {
-    let edit = document.getElementsByClassName("edit");
+    let edit = document.querySelectorAll('.edit');
 
     for (let i = 0; i < edit.length; i++) {
         edit[i].onclick = function(e) {
@@ -343,7 +345,7 @@ function editElement() {
             editButton.onclick = function() {
                 if (confirm('Are you sure you want to edit this city?')) {
 
-                    let li = document.createElement("li");
+                    let li = document.createElement('li');
                     getInput(li);
             
                     let cityListElement = e.target.parentElement;
@@ -375,12 +377,12 @@ function editElement() {
 function newElement() {
 
     if (input.value === '') {
-      alert("You must write something!");
+      alert('You must write something!');
     } else {
         if (confirm('Are you sure you want to add this city to your bucket list?')) {
-            let li = document.createElement("li");
+            let li = document.createElement('li');
             getInput(li)
-            document.getElementById("cityList").appendChild(li);
+            document.querySelector('#cityList').append(li);
             emptyInputField();
 
             createDeleteElement(li)
@@ -419,7 +421,8 @@ editElement();
 
 
 // ADD EVENT LISTENER 
-document.getElementById("addInputField").addEventListener("click", addInputField);
-inputButton.addEventListener("click", newElement);
-editButton.addEventListener("click", editElement);
-cancelButton.addEventListener("click", cancelInputField);
+
+document.querySelector('#addInputField').addEventListener('click', addInputField);
+inputButton.addEventListener('click', newElement);
+editButton.addEventListener('click', editElement);
+cancelButton.addEventListener('click', cancelInputField);
