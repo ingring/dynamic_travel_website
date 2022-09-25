@@ -7,15 +7,10 @@ This page was created as a part of the subject IDG1292 Front-end development, a 
 Give the user a random place to travel to in Europe as well as presenting a picture and inform about the place. The user can also decide if it wants a city with a beach, a capital or other cities. Then the user can custom their own bucket list with adding and deleting cities from the list. 
 
 ## The process 
-This task was seperated in three assignments. I started defining the goal and designed the script, first with bulletspoints and then with flowchart. 
-
-### Defining the goal and designing the script
-![alt goal assignment one](goals/goal_assignment1.pdf)
-![alt goal assignment two](goals/goal_assignment2.pdf)
-![alt goal assignment three](goals/goal_assignment3.pdf)
+This task was seperated in three assignments. I started defining the goal and designed the script, first with bulletspoints and then with flowchart. It is one goal file to each assignment. You can find them in the goals folder. 
 
 ## Images
-The images is from unsplash.com
+The images is from unsplash.com \
 Some of the images are downloaded and placed in the img folder. The other images is linked with the url from unsplash.
 
 ## Notes
