@@ -10,9 +10,9 @@ Give the user a random place to travel to in Europe as well as presenting a pict
 This task was seperated in three assignments. I started defining the goal and designed the script, first with bulletspoints and then with flowchart. 
 
 ### Defining the goal and designing the script
-![alt goal assignment one](goals/goal_assignment1)
-![alt goal assignment two](goals/goal_assignment2)
-![alt goal assignment three](goals/goal_assignment3)
+![alt goal assignment one](goals/goal_assignment1.pdf)
+![alt goal assignment two](goals/goal_assignment2.pdf)
+![alt goal assignment three](goals/goal_assignment3.pdf)
 
 ## Images
 The images is from unsplash.com
