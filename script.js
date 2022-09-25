@@ -217,11 +217,11 @@ document.querySelector('#capitals').onclick = function() {cityRandom(capitals)};
 let cityNodelist = document.querySelectorAll('LI');
 
 // The input buttons 
-let input = document.querySelector('#cityInput');
-let inputButton = document.querySelector('#inputButton');
-let editButton = document.querySelector('#editButton');
-let resetButton = document.querySelector('#resetButton');
-let cancelButton = document.querySelector('#cancelButton');
+const input = document.querySelector('#cityInput');
+const inputButton = document.querySelector('#inputButton');
+const editButton = document.querySelector('#editButton');
+const resetButton = document.querySelector('#resetButton');
+const cancelButton = document.querySelector('#cancelButton');
 
 
 // HELPER FUNCTIONS
